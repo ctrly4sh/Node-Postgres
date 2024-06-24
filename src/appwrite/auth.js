@@ -2,7 +2,7 @@ import config from "../config/config.js";
 import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
-    client = new Client();
+    client = new Client()
     account;
 
     constructor() {
@@ -19,7 +19,7 @@ export class AuthService {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
 
             if (userAccount) {
-                
+                return this.login(email, password)
             } else {
                 return userAccount;
             }
@@ -29,9 +29,40 @@ export class AuthService {
         }
     }
 
-    async login({email, password}){
+    //Login 
 
+    async login({ email, password }) {
+        try {
+            return await this.account.createEmailPasswordSession(email, password);
+        } catch (exe) {
+            throw exe;
+        }
     }
+
+    //is the user logged in
+
+    async getCurrentUser() {
+        try {
+            return await this.account.get()
+        } catch (exe) {
+            console.log("Appwrite server error");
+            throw exe;
+        }
+
+        return null;
+    }
+
+    //logout
+
+    async logout() {
+        try{
+            await this.account.deleteSessions()
+        }catch(exe){
+
+        }
+    }
+
+
 
 }
 
