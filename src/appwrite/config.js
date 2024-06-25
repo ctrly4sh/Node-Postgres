@@ -45,7 +45,69 @@ export class Service {
             console.log(exe);
         }
     }
+
+    //delete post
+    async deleteFile(slug) {
+        try {
+            await this.databases.deleteDocument(config.appwriteDatabaseId, config.appwriteCollectionId, slug)
+            return true
+        } catch (exe) {
+            return false
+        }
+    }
+
+    //get post : Single
+    getPost(fileId) {
+        return this.bucket.getFilePreview(config.appwriteBucketId, fileId)
+    }
+
+    //get multiple posts using query 
+    async getPosts(queries = [Query.equal("status", "active")]) {
+        try {
+            return await this.databases.listDocuments(config.appwriteDatabaseId, config.appwriteCollectionId, queries)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //upload file 
+    async uploadfile(file) {
+        try {
+            return await this.bucket.createFile(
+                config.appwriteBucketId,
+                ID.unique(),
+                file)
+
+        } catch (exe) {
+            console.log(exe);
+        }
+    }
+
+    //delete file
+    async deleteFile(fileId) {
+        try {
+            return await this.bucket.deleteFile(
+                config.appwriteBucketId,
+                fileId)
+
+        } catch (exe) {
+            console.log(exe);
+        }
+    }
+
+    //getFile preview 
+
+    getFilePreview(fileId){
+        try{   
+            return this.bucket.getFilePreview(config.appwriteBucketId, fileId)
+        }catch(exe){
+            console.log(exe);
+        }
+    }
+
 }
+
+
 
 const service = new Service()
 export default service
