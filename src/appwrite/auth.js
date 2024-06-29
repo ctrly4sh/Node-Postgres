@@ -51,7 +51,6 @@ export class AuthService {
             throw exe;
         }
 
-        return null;
     }
 
     //logout
