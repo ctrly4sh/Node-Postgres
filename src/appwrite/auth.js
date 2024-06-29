@@ -1,3 +1,5 @@
+//authentication and user credibility functions 
+
 import config from "../config/config.js";
 import { Client, Account, ID } from "appwrite";
 
@@ -55,9 +57,9 @@ export class AuthService {
     //logout
 
     async logout() {
-        try{
+        try {
             await this.account.deleteSessions()
-        }catch(exe){
+        } catch (exe) {
 
         }
     }
