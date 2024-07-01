@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { login, logout } from "./store/authSlice"
 import authService from './appwrite/auth';
 import "./App.css";
-import Header from './components/Header';
-import Footer from "./components/Footer"
+import Header from './components/Header/Header';
+import Footer from "./components/Footer/Footer"
 
 const App = () => {
 
@@ -27,12 +27,13 @@ const App = () => {
 
   // console.log(import.meta.env.VITE_APPWRITE_URL);
 
+  //
   return !loading ? (
     <>
       <div className='min-h-screen flex flex-wrap'>
         <div className='w-full block'>
-          <Header/>
-          <Footer/>
+          <Header />
+          <Footer />
         </div>
       </div>
     </>
