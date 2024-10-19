@@ -1,14 +1,16 @@
 const express = require("express");
 require("dotenv").config();
-const bodyParser = require("body-parser")
-const Pool = require('pg').Pool;
+const bodyParser = require("body-parser");
+const Pool = require("pg").Pool;
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended : true,
-}))
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_CONNECTION_STRING,
@@ -17,12 +19,11 @@ const pool = new Pool({
   },
 });
 
-
-app.get('/' , (req,res)=>{
+app.get("/", (req, res) => {
   res.json({
-    info : "Node + postgres"
-  })
-})
+    info: "Node + postgres",
+  });
+});
 
 app.get("/users", async (req, res) => {
   // res.send("Api started")
@@ -36,7 +37,6 @@ app.get("/users", async (req, res) => {
     });
   }
 });
-
 const PORT = process.env.SERVER_PORT;
 
 app.listen(PORT, () => {
