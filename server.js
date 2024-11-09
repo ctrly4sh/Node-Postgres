@@ -1,9 +1,12 @@
 const express = require("express");
 require("dotenv").config();
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const Pool = require("pg").Pool;
 
 const app = express();
+
+const CONNECTIONSTRING = process.env.POSTGRES_CONNECTION_STRING;
+const PORT = process.env.SERVER_PORT || 8007;
 
 app.use(bodyParser.json());
 app.use(
@@ -13,22 +16,18 @@ app.use(
 );
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_CONNECTION_STRING,
+  connectionString: CONNECTIONSTRING,
   ssl: {
     rejectUnauthorized: false,
   },
 });
 
-app.get("/", (req, res) => {
+app.get("/" , (req,res)=>{
   res.json({
-    info: "Node + postgres",
-  });
+    message : "Node + Neon"
+  })
 });
 
-app.get("/users", )
-
-const PORT = process.env.SERVER_PORT;
-
-app.listen(PORT, () => {
+app.listen(PORT , ()=>{
   console.log(`Server started at localhost:${PORT}`);
-});
+})
