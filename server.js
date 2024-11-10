@@ -5,8 +5,6 @@ const Pool = require("pg").Pool;
 
 const app = express();
 
-const CONNECTIONSTRING = process.env.POSTGRES_CONNECTION_STRING;
-const PORT = process.env.SERVER_PORT || 8007;
 
 app.use(bodyParser.json());
 app.use(
